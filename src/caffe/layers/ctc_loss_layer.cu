@@ -1,6 +1,4 @@
 #include "caffe/layers/ctc_loss_layer.hpp"
-#include <sstream>
-#include <iterator>
 
 namespace caffe {
   template <>
@@ -30,11 +28,6 @@ namespace caffe {
                       mini_batch, options, &size_bytes));
       void* workspace;
       CUDA_CHECK(cudaMalloc(&workspace, size_bytes));
-
-      /*std::ostringstream ss;
-      std::copy(flat_labels.begin(), flat_labels.end(),
-                std::ostream_iterator<int>(ss, " "));
-      LOG(INFO) << "flat label content: " << ss.str();*/
       vector<Dtype> cost(mini_batch);
       CHECK_CTC_STATUS(compute_ctc_loss(activations, gradients,
                        flat_labels_.data(),
