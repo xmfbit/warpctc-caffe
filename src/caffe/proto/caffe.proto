@@ -406,6 +406,31 @@ message LayerParameter {
   optional ThresholdParameter threshold_param = 128;
   optional TileParameter tile_param = 138;
   optional WindowDataParameter window_data_param = 129;
+  optional CtcLossParameter ctc_loss_param = 200;
+  optional ContinuationIndicatorParameter continuation_indicator_param = 201;
+  optional PermuteParameter permute_param = 202;
+  optional LabelsequenceAccuracyParameter labelsequence_accuracy_param = 203;
+}
+
+message CtcLossParameter {
+    optional uint32 alphabet_size = 1 [default = 0];
+    optional uint32 time_step = 3 [default = 0];
+    optional int32 blank_label = 4 [default = 0];
+}
+message ContinuationIndicatorParameter {
+    optional uint32 time_step = 1 [default = 0];
+    optional uint32 batch_size = 2 [default = 0];
+}
+
+message PermuteParameter {
+      // The new orders of the axes of data. Notice it should be with
+      // in the same range as the input data, and it starts from 0.
+      // Do not provide repeated order.
+      repeated uint32 order = 1;
+}
+
+message LabelsequenceAccuracyParameter {
+  optional int32 blank_label = 1 [default = 0];
 }
 
 // Message that stores parameters used to apply transformation

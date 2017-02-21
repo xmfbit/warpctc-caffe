@@ -97,3 +97,12 @@ LOCK
 LOG*
 CURRENT
 MANIFEST-*
+
+# captcha image
+data/captcha/*
+
+# log files
+examples/warpctc_captcha/log/*
+
+# model files
+examples/warpctc_captcha/model/*
