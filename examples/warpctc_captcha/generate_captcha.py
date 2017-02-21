@@ -3,23 +3,40 @@
 from captcha.image import ImageCaptcha
 import os
 import numpy as np
+from multiprocessing import Process
 
-DATASET_SIZE = 5000
+DATASET_SIZE = 100000
 LABEL_SEQ_LENGTH = 5
+BLANK_LABEL = 10
+
 def generate_random_label(length):
     """
-    generate labels, we use 0 as blank
+    generate labels, we use 10 as blank
     """
-    rand_array = np.random.randint(11, size = length)
-    not_blank = rand_array[rand_array > 0]
-    not_blank -= 1
+    not_blank = []
+    while len(not_blank) == 0:
+        rand_array = np.random.randint(11, size = length)
+        not_blank = rand_array[rand_array != BLANK_LABEL]
+
     return ''.join(map(lambda x: str(x), not_blank))
 
 image = ImageCaptcha()
-#CAFFE_ROOT='/home/xmf/caffe-dist/caffe-warpctc/'
 CAFFE_ROOT = os.getcwd()   # assume you are in $CAFFE_ROOT$ dir
 img_path = os.path.join(CAFFE_ROOT, 'data/captcha/')
 
-for i in xrange(DATASET_SIZE):
-    label_seq = generate_random_label(LABEL_SEQ_LENGTH)
-    image.write(label_seq, os.path.join(img_path, '%05d-'%i + label_seq + '.png'))
+def generate_image(start, end):
+    for idx in xrange(start, end):
+        label_seq = generate_random_label(LABEL_SEQ_LENGTH)
+        image.write(label_seq, os.path.join(img_path, '%05d-'%idx + label_seq + '.png'))
+threads_num = 4
+threads = []
+batch_size = DATASET_SIZE / threads_num
+for t in xrange(threads_num):
+    start, end = t*batch_size, (t+1)*batch_size
+    if t == threads_num - 1:
+        end = DATASET_SIZE
+    p = Process(target = generate_image, args = (start, end))
+    p.start()
+    threads.append(p)
+for p in threads:
+    p.join()

@@ -5,7 +5,7 @@ import numpy as np
 from multiprocessing import Process
 import caffe
 import h5py
-#CAFFE_ROOT = '/home/xmf/caffe-dist/caffe-warpctc/'
+
 CAFFE_ROOT = os.getcwd()   # assume you are in $CAFFE_ROOT$ dir
 img_path = os.path.join(CAFFE_ROOT, 'data/captcha/')
 IMAGE_WIDTH, IMAGE_HEIGHT = 80, 30
@@ -28,7 +28,7 @@ def write_image_info_into_file(file_name, images):
 def write_image_info_into_hdf5(file_name, images, phase):
     total_size = len(images)
     print '[+] total image for {0} is {1}'.format(file_name, len(images))
-    single_size = 1000
+    single_size = 20000
     groups = total_size / single_size
     if total_size % single_size:
         groups += 1
@@ -55,6 +55,7 @@ def write_image_info_into_hdf5(file_name, images, phase):
             f.create_dataset('label', data = label_seq)
     with open(file_name, 'w') as f:
         workspace = os.path.split(file_name)[0]
+        process_pool = []
         for g in xrange(groups):
             h5_file_name = os.path.join(workspace, '%s_%d.h5' %(phase, g))
             f.write(h5_file_name + '\n')
@@ -64,8 +65,10 @@ def write_image_info_into_hdf5(file_name, images, phase):
                 end_idx = len(images)
             p = Process(target = process, args = (h5_file_name, images[start_idx:end_idx]))
             p.start()
+            process_pool.append(p)
+        for p in process_pool:
             p.join()
-trainning_size = 4000   # number of images for trainning
+trainning_size = 80000   # number of images for trainning
 trainning_images = images[:trainning_size]
 
 testing_images = images[trainning_size:]

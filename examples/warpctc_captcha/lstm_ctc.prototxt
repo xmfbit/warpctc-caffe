@@ -9,7 +9,7 @@ layer {
     }
     hdf5_data_param {
         source: "./data/captcha/trainning.list"
-        batch_size: 128
+        batch_size: 512
     }
 }
 
@@ -23,7 +23,7 @@ layer {
     }
     hdf5_data_param {
         source: "./data/captcha/testing.list"
-        batch_size: 128
+        batch_size: 512
     }
 }
 
@@ -33,7 +33,7 @@ layer {
     top: "indicator"
     continuation_indicator_param {
         time_step:  80
-        batch_size: 128
+        batch_size: 512
     }
 }
 
