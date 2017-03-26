@@ -38,8 +38,9 @@ def main(log_file):
     # plt accracy
     plt.plot(accuracy)
     plt.title('test accuracy')
-    plt.show()
     plt.savefig('test_accuracy.png')
+    plt.show()
+    plt.close()
 
 def print_help():
     print """this script do simple string match to parse train log file of warpctc demo

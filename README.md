@@ -6,3 +6,39 @@ There is a toy demo in `examples/warpctc_captcha`, which can train a 2-layer lst
 
 This repo is a personal project.
 
+## How to run the demo
+
+In this demo, captcha images can contain digit sequence with different length(more specifically, 1~5 digits). CTC loss is very suitable for this kind of variable length sequence learning. See the three images below for detail of the examples in the demo.
+
+![captcha image with 3 digits](/docs/images/captcha/99944-492.png)
+![captcha image with 4 digits](/docs/images/captcha/99938-4518.png)
+![captcha image with 5 digits](/docs/images/captcha/99937-82028.png)
+
+To run the demo, first, make sure you are in `$CAFFE_ROOT` directory. Then, run the scripts to generate data using python `captcha` library and hdf5 files for trainning and testing.
+
+```
+# generate data
+python examples/warpctc_captcha/generate_captcha.py
+# generate hdf5 files
+python examples/warpctc_captcha/generate_dataset.py
+```
+
+Due to different hardware capabilities, this process may take a different time. Then you should find captcha images in directory `$CAFFE_ROOT/data/captcha`. You can change the parameters in the above two scripts to get larger dataset and use more threads to accerate the process.
+
+Then, you can run the bash script to train the 2-layer lstm model using ctc loss.
+
+```
+./examples/warpctc_captcha/train.sh
+```
+
+Have a cup of coffee when tranning!
+
+## Demo results
+
+I ran the demo for several times and the model can converge finally. The accuracy of the model is not too high, but enough to prove the power of the naive 2-layer lstm network.
+
+![trainning loss result](/docs/images/captcha/train_loss.png)
+![test loss result](/docs/images/captcha/test_loss.png)
+![test accuracy](/docs/images/captcha/test_accuracy.png)
+
+The model I trainned can be downloaded from [Google Drive](https://drive.google.com/file/d/0B98MUaCGMMG0UVd1WWFrNHZLdTg/view?usp=sharing).
