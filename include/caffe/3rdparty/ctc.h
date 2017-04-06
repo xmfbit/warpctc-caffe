@@ -101,29 +101,8 @@ ctcStatus_t compute_ctc_loss(const float* const activations,
                              float *costs,
                              void *workspace,
                              ctcOptions options);
-ctcStatus_t compute_ctc_loss_cpu(const float* const activations,
-                             float* gradients,
-                             const int* const flat_labels,
-                             const int* const label_lengths,
-                             const int* const input_lengths,
-                             int alphabet_size,
-                             int minibatch,
-                             float *costs,
-                             void *workspace,
-                             ctcOptions options);
 
-#ifndef CPU_ONLY
-ctcStatus_t compute_ctc_loss_gpu(const float* const activations,
-                             float* gradients,
-                             const int* const flat_labels,
-                             const int* const label_lengths,
-                             const int* const input_lengths,
-                             int alphabet_size,
-                             int minibatch,
-                             float *costs,
-                             void *workspace,
-                             ctcOptions options);
-#endif
+
 /** For a given set of labels and minibatch size return the required workspace
  *  size.  This will need to be allocated in the same memory space as your
  *  probabilities.
