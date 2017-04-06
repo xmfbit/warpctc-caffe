@@ -28,7 +28,7 @@ namespace caffe {
                                   const vector<Blob<Dtype>*>& bottom) {}
         virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
                                   const vector<bool>& propagate_down,
-                                  const vector<Blob<Dtype>*>& bottom) {}
+                                  const vector<Blob<Dtype>*>& bottom);
         int mini_batch_;
         int time_step_;
     };
