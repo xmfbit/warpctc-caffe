@@ -14,6 +14,8 @@ In this demo, captcha images can contain digit sequence with different length(mo
 ![captcha image with 4 digits](/docs/images/captcha/99938-4518.png)
 ![captcha image with 5 digits](/docs/images/captcha/99937-82028.png)
 
+The original WarpCTC by Baidu Research supports multi-thread processing when using CPU. However it is not supported by this repo. So GPU is necessary for the following experiment, otherwise the running time will be unbearably long. Or you can reduce the dataset size to save time.
+
 To run the demo, first, make sure you are in `$CAFFE_ROOT` directory. Then, run the scripts to generate data using python `captcha` library and hdf5 files for trainning and testing.
 
 ```
