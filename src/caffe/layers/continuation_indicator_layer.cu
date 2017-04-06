@@ -12,7 +12,7 @@ namespace caffe {
         caffe_gpu_set(mini_batch_*(time_step_ - 1), Dtype(1), top_data + mini_batch_);
     }
     template <typename Dtype>
-    void ContinuationIndicatorLayer::Backward_gpu(const vector<Blob<Dtype>*>& top,
+    void ContinuationIndicatorLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
             const vector<bool>& propagate_down,
             const vector<Blob<Dtype>*>& bottom)
     {}

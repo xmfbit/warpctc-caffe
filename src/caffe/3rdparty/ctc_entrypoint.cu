@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include "caffe/3rdparty/ctc.h"
-#include "caffe/3rdparty/detail/cpu_ctc.h"
+#include "caffe/3rdparty/detail/cpu_ctc.cuh"
 #ifdef __CUDACC__
 #include "caffe/3rdparty/detail/gpu_ctc.cuh"
 #endif
@@ -36,4 +36,5 @@ ctcStatus_t compute_ctc_loss_gpu(const float* const activations,
         std::cerr << "GPU execution requested, but not compiled with GPU support" << std::endl;
         return CTC_STATUS_EXECUTION_FAILED;
 #endif
+}
 }
