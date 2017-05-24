@@ -2,7 +2,7 @@
 
 CTC Loss is used in sequence learning. The repo merges WarpCTC which is implmented and maintained by Baidu Research into Caffe.
 
-There is a toy demo in `examples/warpctc_captcha`, which can train a 2-layer lstm model to recongnize the captcha in an image. To run the demo, you should first generate the dataset for trainning and validating with the python scripts, then it is an ordinary tranning procedure using Caffe.
+There is a toy demo in `examples/warpctc_captcha`, which can train a 2-layer lstm model to recongnize the captcha in an image. To run the demo, you should first generate the dataset for training and validating with the python scripts, then it is an ordinary tranning procedure using Caffe.
 
 This repo is a personal project.
 
@@ -16,7 +16,7 @@ In this demo, captcha images can contain digit sequence with different length(mo
 
 The original WarpCTC by Baidu Research supports multi-thread processing when using CPU. However it is not supported by this repo. So GPU is necessary for the following experiment, otherwise the running time will be unbearably long. Or you can reduce the dataset size to save time.
 
-To run the demo, first, make sure you are in `$CAFFE_ROOT` directory. Then, run the scripts to generate data using python `captcha` library and hdf5 files for trainning and testing.
+To run the demo, first, make sure you are in `$CAFFE_ROOT` directory. Then, run the scripts to generate data using python `captcha` library and hdf5 files for training and testing.
 
 ```
 # generate data
@@ -33,11 +33,11 @@ Then, you can run the bash script to train the 2-layer lstm model using ctc loss
 ./examples/warpctc_captcha/train.sh
 ```
 
-Have a cup of coffee when tranning!
+Have a cup of coffee when training!
 
 ## Demo results
 
-I ran the demo for several times and the model can converge finally. The accuracy of the model is not too high, but enough to prove the power of the naive 2-layer lstm network.
+I ran the demo for several times and the model can converge finally. The accuracy of the model is not too high, but enough to prove the power of the naive 2-layer lstm network trained with CTC loss.
 
 ![trainning loss result](/docs/images/captcha/train_loss.png)
 ![test loss result](/docs/images/captcha/test_loss.png)
