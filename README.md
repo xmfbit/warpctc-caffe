@@ -6,6 +6,14 @@ There is a toy demo in `examples/warpctc_captcha`, which can train a 2-layer lst
 
 This repo is a personal project.
 
+## Issue when building the project
+Please comment the following lines in `Makefile.config`, otherwise it may cause gradient explosion when training because old CUDA runtime library doesn't support `__shlf_down` used in Baidu's implementation. See [issue 1](https://github.com/xmfbit/warpctc-caffe/issues/1) for detail(discussion in Chinese).
+
+```
+-gencode arch=compute_20,code=sm_20 
+-gencode arch=compute_20,code=sm_21
+```
+
 ## How to run the demo
 
 In this demo, captcha images can contain digit sequence with different length(more specifically, 1~5 digits). CTC loss is very suitable for this kind of variable length sequence learning. See the three images below for detail of the examples in the demo.
