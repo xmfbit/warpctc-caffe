@@ -24,18 +24,21 @@ image = ImageCaptcha()
 CAFFE_ROOT = os.getcwd()   # assume you are in $CAFFE_ROOT$ dir
 img_path = os.path.join(CAFFE_ROOT, 'data/captcha/')
 
-def generate_image(start, end):
+def generate_image(seed, start, end):
+    np.random.seed(seed)
     for idx in xrange(start, end):
         label_seq = generate_random_label(LABEL_SEQ_LENGTH)
         image.write(label_seq, os.path.join(img_path, '%05d-'%idx + label_seq + '.png'))
-threads_num = 4
+
+threads_num = 10
 threads = []
 batch_size = DATASET_SIZE / threads_num
+
 for t in xrange(threads_num):
     start, end = t*batch_size, (t+1)*batch_size
     if t == threads_num - 1:
         end = DATASET_SIZE
-    p = Process(target = generate_image, args = (start, end))
+    p = Process(target = generate_image, args = (t, start, end))
     p.start()
     threads.append(p)
 for p in threads:
