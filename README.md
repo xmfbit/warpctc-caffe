@@ -4,6 +4,8 @@ CTC Loss is used in sequence learning. The repo merges WarpCTC which is implment
 
 There is a toy demo in `examples/warpctc_captcha`, which can train a 2-layer lstm model to recongnize the captcha in an image. To run the demo, you should first generate the dataset for training and validating with the python scripts, then it is an ordinary tranning procedure using Caffe.
 
+Here is also a similar repo implemented by PyTorch. See [captcha-recognition](https://github.com/xmfbit/captcha-recognition) for detail.
+
 This repo is a personal project.
 
 ## Issue when building the project
