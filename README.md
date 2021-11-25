@@ -53,7 +53,7 @@ I ran the demo for several times and the model can converge finally. The accurac
 ![test loss result](/docs/images/captcha/test_loss.png)
 ![test accuracy](/docs/images/captcha/test_accuracy.png)
 
-The model I trainned can be downloaded from [Google Drive](https://drive.google.com/file/d/0B98MUaCGMMG0UVd1WWFrNHZLdTg/view?usp=sharing).
+The model I trainned can be downloaded from [Google Drive](https://drive.google.com/file/d/0B98MUaCGMMG0em1uQzkzYmt3U00/view?usp=sharing&resourcekey=0-YVFR1FVDB1ObbnM9wqvfEg).
 
 Check `./examples/warpctc_captcha/captcha_prediction.cpp` for deployment. It is modified based on `examples/cpp_classification/classification.cpp`.
 
